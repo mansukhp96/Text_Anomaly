@@ -38,6 +38,12 @@ def fetchTweets():
 
 	return l
 
+def getFields(idl):
+	f = open('KashmirTwitterData.txt', 'r')
+	for line in f.readlines():
+		x = line.split('t')
+		
+
 def removeTfIdf():
 	arr1=[]	
 	for key, value in l.iteritems():	
@@ -114,30 +120,33 @@ def hostilityfactor(x):
 			x.remove(i)	
 	frac = float(count)/float(len(x))
 	return frac	
+def Hostile():
+	hos=[]
+	top=0;
+
+	for y in arr1:
+		y=y.split(' ')
+		red=hostilityfactor(y)
+		hos.append(red)
+		top+=1;
+	top =top * 0.005
+	print top
+	li=[]
+	for i in range(int(top)+1): 
+		li.append(hos.index(max(hos)))
+		hos[hos.index(max(hos))]=0.0	
+		
+	print li
 
 		
 l = fetchTweets()
 l2 = removeTfIdf()
-stop = set(stopwords.words('english'))
-
-hos=[]
-top=0;
-
 arr1=[]	
 for key, value in l.iteritems():	
 	arr1.append(value)	
-for y in arr1:
-	y=y.split(' ')
-	red=hostilityfactor(y)
-	hos.append(red)
-	top+=1;
-top =top * 0.005
-print top
-li=[]
-for i in range(int(top)+1): 
-	li.append(hos.index(max(hos)))
-	hos[hos.index(max(hos))]=0.0
-print li
+	
+stop = set(stopwords.words('english'))
+Hostile()
 
 
 sid = SentimentIntensityAnalyzer()
