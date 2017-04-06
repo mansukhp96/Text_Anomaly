@@ -34,7 +34,7 @@ def fetch_tweets():
 
 	f.close()
 	return l
-	
+
 def removeTfIdf():
 	arr1=[]	
 	temp_sentences = []
@@ -133,6 +133,7 @@ if __name__=='__main__':
 	for key, value in l.iteritems():	
 		arr1.append(value)	
 		
+
 	stop = set(stopwords.words('english'))
 	Hostile()
 	sid = SentimentIntensityAnalyzer()
